@@ -18,6 +18,6 @@ def pierwsza(nazwa):
             else:
                 slownik[sciezka[1]] = {sciezka[0]: rozmiar}
         else:
-            continue
-
+            katalog = nazwa + "\\" + file
+            slownik = pierwsza(katalog)
     return slownik

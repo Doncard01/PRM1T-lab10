@@ -1,4 +1,5 @@
 import os
+import shutil
 
 def pierwsza(nazwa):
     assert isinstance(nazwa, str), "Podany parametr nie jest napisem!"
@@ -21,3 +22,19 @@ def pierwsza(nazwa):
             katalog = nazwa + "\\" + file
             slownik = pierwsza(katalog)
     return slownik
+
+def druga(rozszerzenie, skad, do):
+    assert isinstance(rozszerzenie, str), "Podany parametr <rozszerzenie> nie jest napisem!"
+    assert isinstance(skad, str), "Podany parametr <skad> nie jest napisem!"
+    assert isinstance(do, str), "Podany parametr <do> nie jest napisem!"
+    if os.path.exists(os.path.abspath(skad)) == False or os.path.exists(os.path.abspath(do)) == False:
+        raise FileExistsError("Nie znaleziono katalogu!")
+    files = os.listdir(os.path.abspath(skad))
+    for file in files:
+        src = os.path.join(skad, file)
+        des = os.path.abspath(do)
+        if rozszerzenie == os.path.splitext(file)[1]:
+            if os.path.isdir(do) == False:
+                os.makedirs(des)
+
+            shutil.copyfile(src, des)
